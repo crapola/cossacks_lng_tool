@@ -7,10 +7,11 @@ ENCODING="ansi"
 
 def dict_from_txt_file(path):
 	with open(path,"r",encoding=ENCODING) as file:
-		pattern=r"@(?P<key>.+?)\n(?P<value>.+?)\n(?:\t|\Z)"
+		pattern=r"@(?P<key>.+?)\n(?P<value>.+?)\n(?=\t|\Z)"
 		lines=file.read()
-		regex=re.compile(pattern)
-		matches=regex.findall(lines)		
+		regex=re.compile(pattern,re.S)
+		matches=regex.findall(lines)
+	#print(matches)
 	return dict(matches)
 
 def bytes_from_dict(d):
